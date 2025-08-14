@@ -1,12 +1,13 @@
 {
+	"item.colorist.rainbow_dye": "§d彩§e虹§3染§a料",
+	"item.colorist.grayscale_dye": "§8阴§7阳§r染料",
+	"item.colorist.bleak_dye": "§d黯§3淡§r染料",
+	"item.colorist.soil_dye": "土色染料",
 
-    "item.colorist.rainbow_dye": "§d彩§e虹§3染§a料",
-    "item.colorist.grayscale_dye": "§8阴§7阳§r染料",
-    "item.colorist.bleak_dye": "§d黯§3淡§r染料",
-    "item.colorist.soil_dye": "土色染料",
+	"item.colorist.magic_book": "§d魔§e虹§3术§a书",
+	"item.colorist.magic_paper": "§d魔§e虹§3术§a纸",
+	"item.colorist.magic_crystal": "§d魔§e虹§3术§a晶",
 
-    "item.colorist.magic_book": "§d魔§e虹§3术§a书",
-    "item.colorist.magic_paper": "§d魔§e虹§3术§a纸",
-    "item.colorist.magic_table": "§d魔§e虹§3术§a台"
-
-} 
+	"block.colorist.magic_table": "§d魔§e虹§3术§a台",
+	"block.colorist.magic_crystal_ore": "§d魔§e虹§3矿§a石"
+}
