@@ -5,7 +5,13 @@ ServerEvents.recipes(e => {
 		["minecraft:glowstone_dust"],
 		global.GET_DYE("orange")
 	);
-	global.RECIP(e, "shapeless", ["minecraft:grass"], global.GET_DYE("green"));
+	global.RECIP(e, "shapeless", ["minecraft:grass"], global.GET_DYE("green"), true);
+	global.RECIP(e, "shapeless", ["minecraft:lily_pad"], global.GET_DYE("green"), true);
+	global.RECIP(e, "shapeless", ["minecraft:bamboo"], global.GET_DYE("green"), true);
+	global.RECIP(e, "shapeless", ["minecraft:moss_block"], global.GET_DYE("green"), true);
+
+
+
 	global.RECIP(
 		e,
 		"shapeless",
