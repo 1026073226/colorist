@@ -39,6 +39,7 @@ PlayerEvents.respawned((event) => {
 		player
 			.getAttribute("minecraft:generic.max_health")
 			.setBaseValue(mhp + hp);
+		player.setHealth(mhp + hp);
 		player.persistentData.putBoolean("hasHpBonus", true);
 	} else if (player.persistentData.getBoolean("hasHpBonus") && !item) {
 		player

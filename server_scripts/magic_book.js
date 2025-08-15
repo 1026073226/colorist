@@ -1,6 +1,6 @@
 // 魔法书右键射线攻击逻辑（基于KubeJS事件文档）
-ItemEvents.rightClicked((event) => {
-
+var isDamaged = false;
+ItemEvents.rightClicked(event => {
 	const { server, player, item } = event;
 	// 提取魔法书颜色属性
 	const attrs = global.CALC_ATTRS(item.nbt.attrs || []);
@@ -21,23 +21,22 @@ ItemEvents.rightClicked((event) => {
 	player.sendData("colorist:magic_start", {
 		r: attrs.r / 10, // 属性值是0-10范围，需转换为0-1
 		g: attrs.g / 10,
-		b: attrs.b / 10,
+		b: attrs.b / 10
 	});
-  event.cancel();
-
+	event.cancel();
 });
 
-ServerEvents.tick((event) => {
+ServerEvents.tick(event => {
 	const { server } = event;
-	const level = server.overworld(); // 通过server获取主世界
 	const players = server.getPlayers(); // 通过server获取玩家列表
 
-	players.forEach((player) => {
+	players.forEach(player => {
+		const level = player.level; // 通过server获取主世界
 		if (!player.persistentData.usingMagic) return;
 
-		// 最长施法时间3秒
-		if (level.getTime() - player.persistentData.magicStartTime > 30) {
+		if (level.getTime() - player.persistentData.magicStartTime > 10) {
 			player.persistentData.usingMagic = false;
+			isDamaged = false;
 			player.sendData("colorist:magic_stop", {});
 			return;
 		}
@@ -46,7 +45,7 @@ ServerEvents.tick((event) => {
 		const rayTrace = player.rayTrace(10);
 
 		// 命中实体时应用伤害
-		if (rayTrace && rayTrace.entity) {
+		if (rayTrace && rayTrace.entity && !isDamaged) {
 			const target = rayTrace.entity;
 			const item = player.getMainHandItem();
 
@@ -59,11 +58,14 @@ ServerEvents.tick((event) => {
 			if (Math.random() < damageValues.br) {
 				damage *= damageValues.bd;
 				player.tell(Text.gold("暴击!"));
+				player.sendData("colorist:crit", { crit: true });
+			} else {
+				player.sendData("colorist:crit", { crit: false });
 			}
-
 			target.attack(player.damageSources().playerAttack(player), damage);
-			player.persistentData.usingMagic = false;
-			player.sendData("colorist:magic_stop", {});
+			//player.persistentData.usingMagic = false;
+			//player.sendData("colorist:magic_stop", {});
+			isDamaged = true;
 		}
 	});
 });

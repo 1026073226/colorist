@@ -6,7 +6,7 @@ global.ALL_ITEMS = [];
 
 function BASIC(zero) {
 	if (!zero) {
-		this.cost = 1;
+		this.cost = 0.9;
 		this.atk = 3;
 		this.hp = 3;
 		this.br = 0.2;
@@ -305,8 +305,8 @@ global.VALUE_COUNTER = (attr, zero) => {
 
 	// 使用 ATTR_ADDER 来修改 res 的属性
 	global.ATTR_ADDER(res, "cost", -b / 150);
-	global.ATTR_ADDER(res, "atk", Math.pow(r, 1.2) / 10 + Math.pow(level, 0.8) / 4);
-	global.ATTR_ADDER(res, "hp", Math.pow(g, 1.1) / 5);
+	global.ATTR_ADDER(res, "atk", Math.pow(r, 1.1) / 10 + Math.pow(level, 0.8) / 5);
+	global.ATTR_ADDER(res, "hp", Math.pow(g, 1.1) / 5 + Math.pow(level, 0.8) / 5);
 	global.ATTR_ADDER(res, "br", (Math.sqrt(brightness) * 2.5) / 100, 2);
 	global.ATTR_ADDER(res, "bd", darkness / 100);
 	return res;

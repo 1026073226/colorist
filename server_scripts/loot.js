@@ -4,10 +4,10 @@ ServerEvents.entityLootTables((e) => {
 			pool.addItem(
 				Item.of(global.FULL("magic_paper"), {
 					level: 1,
-					attr: "#00FFFF",
+					attr: "#00CCCC",
 				})
 			).count([1, 2]);
-			pool.addItem(Item.of(global.FULL("magic_crystal"))).count([4, 6]);
+			pool.addItem(Item.of(global.FULL("magic_crystal"))).count([2, 3]);
 		});
 	});
 	e.modifyEntity("minecraft:creeper", (table) => {
@@ -15,7 +15,7 @@ ServerEvents.entityLootTables((e) => {
 			pool.addItem(
 				Item.of(global.FULL("magic_paper"), {
 					level: 1,
-					attr: "#00FF00",
+					attr: "#66FF00",
 				})
 			).count([0, 1]);
 			pool.addItem(Item.of("minecraft:tnt")).count([0, 1]);
@@ -38,7 +38,7 @@ ServerEvents.entityLootTables((e) => {
 			pool.addItem(
 				Item.of(global.FULL("magic_paper"), {
 					level: 1,
-					attr: "#00FFFF",
+					attr: "#008888",
 				})
 			).count([0, 3]);
 		});
@@ -51,7 +51,7 @@ ServerEvents.entityLootTables((e) => {
 			pool.addItem(
 				Item.of(global.FULL("magic_paper"), {
 					level: 1,
-					attr: "#00FFFF",
+					attr: "#00CCCC",
 				})
 			).count([0, 2]);
 		});

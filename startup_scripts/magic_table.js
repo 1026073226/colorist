@@ -10,7 +10,7 @@ global.MAGIC_TABLE = (e, s) => {
 		global.FIND_FLOAT_ITEM(world, block).kill();
 		player.give(Item.of(data.get("item"), data.get("nbt")));
 		block.setEntityData({
-			data: { item: "minecraft:air", nbt: {} },
+			data: { item: "minecraft:air", nbt: {} }
 		});
 	}
 
@@ -41,9 +41,16 @@ global.MAGIC_TABLE = (e, s) => {
 					1 / data.nbt.level
 				);
 				block.setEntityData({
-					data: data,
+					data: data
 				});
 				player.tell(Text.of("染色成功").color(data.nbt.attr));
+			} else if (item.id == global.FULL("magic_crystal")) {
+				global.REMOVE_ITEM(item);
+				data.nbt.attr.level += 5;
+				block.setEntityData({
+					data: data
+				});
+				player.tell("添加成功");
 			} else {
 				player.tell("该物品不可用于染色");
 			}
@@ -66,7 +73,7 @@ global.MAGIC_TABLE = (e, s) => {
 						data.nbt.attr = global.CALC_ATTRS(attrs);
 					}
 					block.setEntityData({
-						data: data,
+						data: data
 					});
 					global.REMOVE_ITEM(item);
 					player.tell(
@@ -81,7 +88,7 @@ global.MAGIC_TABLE = (e, s) => {
 				global.REMOVE_ITEM(item);
 				data.nbt.attrs[0].level += 5;
 				block.setEntityData({
-					data: data,
+					data: data
 				});
 				player.tell("添加成功");
 			} else {
