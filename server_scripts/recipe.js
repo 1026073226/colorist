@@ -128,7 +128,8 @@ ServerEvents.recipes(e => {
 		],
 		Item.of(global.FULL("magic_book"), {
 			attrs: [],
-			attr: {}
+			attr: {},
+			hasHpBonus: false,
 		}),
 		true,
 		"magic_book"
