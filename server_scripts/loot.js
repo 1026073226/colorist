@@ -16,3 +16,11 @@ ServerEvents.entityLootTables(e => {
 		});
 	});
 });
+
+ServerEvents.blockLootTables(e => {
+	e.modifyBlock("minecraft:amethyst_block", table => {
+		table.addPool(pool => {
+			pool.addItem(Item.of(global.FULL("magic_crystal_ore")));
+		});
+	});
+});

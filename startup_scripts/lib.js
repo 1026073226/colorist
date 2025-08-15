@@ -7,8 +7,8 @@ global.ALL_ITEMS = [];
 function BASIC(zero) {
 	if (!zero) {
 		this.cost = 1;
-		this.atk = 5;
-		this.hp = 5;
+		this.atk = 3;
+		this.hp = 3;
 		this.br = 0.2;
 		this.bd = 1.5;
 	} else {
@@ -42,6 +42,7 @@ global.FULL = id => {
 global.RECIP = (e, type, from, to, id, ufn) => {
 	if (id) {
 		let fn = from;
+		if(type == "smelting") return e[type](to, from, id, ufn).id(global.FULL(`from_${global.FOMMAT(from)}_to_${global.FOMMAT(to)}`));
 		while (Array.isArray(fn)) {
 			fn = fn[0];
 		}
@@ -254,6 +255,7 @@ global.NC_TO_TEXT = (n, c) => {
 };
 
 global.ATTR_SHOW = (e, text, attr, ext) => {
+	if(!attr) return "";
 	text.add(
 		Text.gold("虹彩: ").append(
 			global.PROG({
@@ -298,12 +300,12 @@ global.ATTR_SHOW = (e, text, attr, ext) => {
 };
 
 global.VALUE_COUNTER = (attr, zero) => {
-	const { r, g, b, brightness, darkness } = attr;
+	const { r, g, b, brightness, darkness, level } = attr;
 	let res = new BASIC(zero);
 
 	// 使用 ATTR_ADDER 来修改 res 的属性
-	global.ATTR_ADDER(res, "cost", -b / 200);
-	global.ATTR_ADDER(res, "atk", Math.pow(r, 1.1) / 10);
+	global.ATTR_ADDER(res, "cost", -b / 150);
+	global.ATTR_ADDER(res, "atk", Math.pow(r, 1.2) / 10 + Math.pow(level, 0.8) / 4);
 	global.ATTR_ADDER(res, "hp", Math.pow(g, 1.1) / 5);
 	global.ATTR_ADDER(res, "br", (Math.sqrt(brightness) * 2.5) / 100, 2);
 	global.ATTR_ADDER(res, "bd", darkness / 100);

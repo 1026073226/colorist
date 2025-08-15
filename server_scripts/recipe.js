@@ -180,4 +180,13 @@ ServerEvents.recipes(e => {
 		["minecraft:tnt", "minecraft:obsidian"],
 		"minecraft:crying_obsidian"
 	);
+
+	global.RECIP(
+		e,
+		"smelting",
+		global.FULL("magic_crystal_ore"),
+		global.FULL("magic_crystal"),
+		50,
+		20 * 3
+	);
 });

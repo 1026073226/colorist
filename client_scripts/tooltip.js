@@ -18,8 +18,8 @@ ItemEvents.tooltip(e => {
 		let attr = global.CALC_ATTRS(nbt.attrs);
 		text.add(
 			Text.yellow("等级: ").append(
-				Text.of(nbt.attr.level || "未知").color(
-					global.FOMMAT(nbt.attr.color || "white")
+				Text.of(typeof attr.level == "number" ? attr.level.toFixed(1) : "未知").color(
+					global.FOMMAT(nbt.attr.color) || "white"
 				)
 			)
 		);

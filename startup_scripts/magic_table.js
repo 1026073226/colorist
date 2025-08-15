@@ -10,7 +10,7 @@ global.MAGIC_TABLE = (e, s) => {
 		global.FIND_FLOAT_ITEM(world, block).kill();
 		player.give(Item.of(data.get("item"), data.get("nbt")));
 		block.setEntityData({
-			data: { item: "minecraft:air", nbt: {} }
+			data: { item: "minecraft:air", nbt: {} },
 		});
 	}
 
@@ -33,7 +33,7 @@ global.MAGIC_TABLE = (e, s) => {
 			let icolor = global.COLOR[global.FOMMAT(item.id)];
 			if (icolor) {
 				global.REMOVE_ITEM(item);
-				data.nbt.level += 0.5;
+				global.ATTR_ADDER(data.nbt, "level", 1);
 				data.nbt.level = global.KEEP(data.nbt.level);
 				data.nbt.attr = global.MERGE_COLOR(
 					data.nbt.attr,
@@ -41,7 +41,7 @@ global.MAGIC_TABLE = (e, s) => {
 					1 / data.nbt.level
 				);
 				block.setEntityData({
-					data: data
+					data: data,
 				});
 				player.tell(Text.of("染色成功").color(data.nbt.attr));
 			} else {
@@ -66,13 +66,24 @@ global.MAGIC_TABLE = (e, s) => {
 						data.nbt.attr = global.CALC_ATTRS(attrs);
 					}
 					block.setEntityData({
-						data: data
+						data: data,
 					});
 					global.REMOVE_ITEM(item);
 					player.tell(
 						`(${attrs.length}/${global.MAX_ATTRS})添加成功`
 					);
 				}
+			} else if (item.id == global.FULL("magic_crystal")) {
+				if (data.nbt.attrs.length == 0) {
+					player.tell("书中没有属性，无法添加术晶");
+					return;
+				}
+				global.REMOVE_ITEM(item);
+				data.nbt.attrs[0].level += 5;
+				block.setEntityData({
+					data: data,
+				});
+				player.tell("添加成功");
 			} else {
 				player.tell("该物品无法夹入书中");
 			}
