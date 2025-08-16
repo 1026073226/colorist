@@ -8,7 +8,8 @@ global.MAGIC_TABLE = (e, s) => {
 
 	function loot() {
 		global.FIND_FLOAT_ITEM(world, block).kill();
-		player.give(Item.of(data.get("item"), data.get("nbt")));
+		let t = Item.of(data.get("item"), data.get("nbt"));
+		player.give(t);
 		block.setEntityData({
 			data: { item: "minecraft:air", nbt: {} }
 		});
@@ -46,7 +47,7 @@ global.MAGIC_TABLE = (e, s) => {
 				player.tell(Text.of("染色成功").color(data.nbt.attr));
 			} else if (item.id == global.FULL("magic_crystal")) {
 				global.REMOVE_ITEM(item);
-				data.nbt.attr.level += 5;
+				data.nbt.level += 5;
 				block.setEntityData({
 					data: data
 				});

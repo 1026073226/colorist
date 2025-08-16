@@ -2,8 +2,8 @@
 var isDamaged = false;
 ItemEvents.rightClicked(event => {
 	const { server, player, item } = event;
-	// 提取魔法书颜色属性
-	const attrs = global.CALC_ATTRS(item.nbt.attrs || []);
+	item.nbt.attr = global.CALC_ATTRS(item.nbt.attrs);
+	const attrs = item.nbt.attr;
 	const value = global.VALUE_COUNTER(attrs);
 	let cost = value.cost;
 	if (item.id !== global.FULL("magic_book")) return;
@@ -13,6 +13,7 @@ ItemEvents.rightClicked(event => {
 		return;
 	}
 	global.ATTR_ADDER(item.nbt.attrs[0], "level", -cost);
+	item.setDamageValue((1 - Math.max(item.nbt.attr.level / (cost * 100), 0)) * 1000);
 	// 设置使用标记
 	player.persistentData.usingMagic = true;
 	player.persistentData.magicStartTime = player.level.getTime();
@@ -50,7 +51,7 @@ ServerEvents.tick(event => {
 			const item = player.getMainHandItem();
 
 			// 计算属性伤害
-			const attrs = global.CALC_ATTRS(item.nbt.attrs);
+			const attrs = item.nbt.attr;
 			const damageValues = global.VALUE_COUNTER(attrs);
 
 			// 应用伤害（基础攻击+暴击计算）
